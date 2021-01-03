@@ -10,7 +10,14 @@ exports.loginpage = (req, res) => {
 
 exports.login = (req, res) => {
   let user = new User(req.body);
-  user.login().then().catch();
+  user
+    .login()
+    .then(() => {
+      res.render("dashboard");
+    })
+    .catch(() => {
+      res.send("enter a valid email or password");
+    });
 };
 
 exports.registerpage = (req, res) => {

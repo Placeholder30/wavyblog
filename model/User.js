@@ -17,9 +17,9 @@ User.prototype.login = function () {
       .findOne({ email: this.data.email })
       .then((attemptedUser) => {
         if (attemptedUser && attemptedUser.password == this.data.password) {
-          resolve("You are logged in");
+          resolve("resolved");
         } else {
-          reject("enter valid username or password");
+          reject("rejected");
         }
       })
       .catch((err) => {
