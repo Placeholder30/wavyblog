@@ -10,9 +10,7 @@ exports.loginpage = (req, res) => {
 
 exports.login = (req, res) => {
   let user = new User(req.body);
-  user.login((result) => {
-    result ? res.render("dashboard") : res.send("Access denied!");
-  });
+  user.login().then().catch();
 };
 
 exports.registerpage = (req, res) => {

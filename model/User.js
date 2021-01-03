@@ -11,14 +11,19 @@ User.prototype.register = function () {
   userCollection.insertOne(this.data);
 };
 
-User.prototype.login = function (callback) {
-  userCollection.findOne({ email: this.data.email }, (err, attemptedUser) => {
-    if (err) console.log(err);
-
-    if (attemptedUser && attemptedUser.password == this.data.password) {
-      callback("login");
-    } else {
-      callback();
-    }
+User.prototype.login = function () {
+  return new Promise((resolve, reject) => {
+    userCollection
+      .findOne({ email: this.data.email })
+      .then((attemptedUser) => {
+        if (attemptedUser && attemptedUser.password == this.data.password) {
+          resolve("You are logged in");
+        } else {
+          reject("enter valid username or password");
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   });
 };
