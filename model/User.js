@@ -22,8 +22,8 @@ User.prototype.login = function () {
           reject("rejected");
         }
       })
-      .catch((err) => {
-        console.log(err);
+      .catch(() => {
+        console.log("Please try again later!");
       });
   });
 };
