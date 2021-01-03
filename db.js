@@ -4,7 +4,7 @@ dotenv.config();
 
 mongodb.connect(
   process.env.DBCONNECTION,
-  { useNewUrlParser: true, useUnifiedTopology: true },
+  { useUnifiedTopology: true },
   (err, client) => {
     try {
       module.exports = client.db();

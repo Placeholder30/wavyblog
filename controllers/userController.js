@@ -9,8 +9,10 @@ exports.loginpage = (req, res) => {
 };
 
 exports.login = (req, res) => {
-  console.log(req.body);
-  res.render("dashboard");
+  let user = new User(req.body);
+  user.login((result) => {
+    result ? res.render("dashboard") : res.send("Access denied!");
+  });
 };
 
 exports.registerpage = (req, res) => {
