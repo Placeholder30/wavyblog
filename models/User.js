@@ -1,13 +1,17 @@
-const userCollection = require("../db").collection("userdata");
+const bcrypt = require("bcryptjs");
+const userCollection = require("../db").db().collection("userdata");
 
 function User(data) {
   this.data = data;
-  this.errors = [];
 }
 
 module.exports = User;
 
 User.prototype.register = function () {
+  //hash password
+  let salt = bcrypt.genSaltSync(10);
+  this.data.password = bcrypt.hashSync(this.data.password, salt);
+  //add data to database
   userCollection.insertOne(this.data);
 };
 
@@ -15,8 +19,11 @@ User.prototype.login = function () {
   return new Promise((resolve, reject) => {
     userCollection
       .findOne({ email: this.data.email })
-      .then((attemptedUser) => {
-        if (attemptedUser && attemptedUser.password == this.data.password) {
+      .then((existingUser) => {
+        if (
+          existingUser &&
+          bcrypt.compareSync(this.data.password, existingUser.password)
+        ) {
           resolve("resolved");
         } else {
           reject("rejected");

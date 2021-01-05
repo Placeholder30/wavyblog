@@ -7,11 +7,11 @@ mongodb.connect(
   { useUnifiedTopology: true },
   (err, client) => {
     try {
-      module.exports = client.db();
-      console.log("connection to db successful");
+      module.exports = client;
       const app = require("./app");
+      console.log("connection to db successful");
     } catch (err) {
-      console.log(err);
+      console.log("an error occured connecting to db", err);
     }
   }
 );

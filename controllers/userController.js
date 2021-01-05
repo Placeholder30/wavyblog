@@ -1,4 +1,4 @@
-const User = require("../model/User");
+const User = require("../models/User");
 
 exports.index = (req, res) => {
   res.render("index");

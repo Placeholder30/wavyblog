@@ -1,7 +1,17 @@
 const express = require("express");
+const session = require("express-session");
+const MongoStore = require("connect-mongo")(session);
 const app = express();
 
+const sessionOptions = session({
+  secret: "this is my secret",
+  store: new MongoStore({ client: require("./db") }),
+  resave: false,
+  saveUninitialized: false,
+  cookie: { maxAge: 1000 * 60 * 60, httpOnly: true },
+});
 app.use(express.static("public"));
+app.use(sessionOptions);
 
 app.set("views", "views");
 app.set("view engine", "ejs");
