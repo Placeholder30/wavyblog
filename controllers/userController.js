@@ -1,7 +1,11 @@
 const User = require("../models/User");
 
-exports.index = (req, res) => {
-  res.render("index");
+exports.home = (req, res) => {
+  if (req.session.email) {
+    res.render("dashboard", { name: req.session.firstName });
+  } else {
+    res.render("index");
+  }
 };
 
 exports.loginpage = (req, res) => {
@@ -10,10 +14,15 @@ exports.loginpage = (req, res) => {
 
 exports.login = (req, res) => {
   let user = new User(req.body);
+
   user
     .login()
-    .then(() => {
-      res.render("dashboard");
+    .then((firstName) => {
+      req.session.email = user.data.email;
+      req.session.firstName = firstName;
+      req.session.save(() => {
+        res.redirect("/");
+      });
     })
     .catch(() => {
       res.send("enter a valid email or password");
@@ -26,6 +35,17 @@ exports.registerpage = (req, res) => {
 
 exports.register = (req, res) => {
   let user = new User(req.body);
-  user.register();
-  res.send("You have successfully registered");
+  user.register(() => {
+    req.session.email = user.data.email;
+    req.session.firstName = user.data.firstname;
+    req.session.save(() => {
+      res.redirect("/");
+    });
+  });
+};
+
+exports.logout = (req, res) => {
+  req.session.destroy(() => {
+    res.redirect("/");
+  });
 };
