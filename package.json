@@ -4,7 +4,7 @@
   "description": " a blog app for edgy people",
   "main": "app.js",
   "scripts": {
-    "start": "node db.js",
+    "start": "nodemon db.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -17,9 +17,10 @@
     "ejs": "^3.1.5",
     "express": "^4.17.1",
     "express-session": "^1.17.1",
-    "mongodb": "^3.6.3"
+    "mongodb": "^3.6.3",
+    "nodemon": "^2.0.7"
   },
   "devDependencies": {
-    "nodemon": "^2.0.6"
+    
   }
 }
