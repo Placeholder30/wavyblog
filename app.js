@@ -21,8 +21,8 @@ const router = require("./router");
 
 app.use("/", router);
 
-app.listen(process.env.PORT, () => {
-  console.log(`Your app is now listening on port ${process.env.PORT}`);
+app.listen(process.env.PORT || 3000, () => {
+  console.log(`Your app is now listening on port 3000`);
 });
 
 module.exports = app;
