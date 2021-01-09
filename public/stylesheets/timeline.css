@@ -1,0 +1,122 @@
+html {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-size: 10px;
+}
+body {
+  background-color: floralwhite;
+}
+
+h1 {
+  text-align: center;
+  margin-top: 0;
+  margin-bottom: 6rem;
+}
+
+.container {
+  width: 70vw;
+  margin: 0 auto;
+}
+
+.logo > img {
+  width: 4rem;
+  height: 4rem;
+}
+
+nav {
+  display: flex;
+  justify-content: space-between;
+}
+a {
+  text-decoration: none;
+  color: black;
+  font-size: 2rem;
+}
+
+.logout {
+  border: 1px solid black;
+  padding: 0.6rem;
+}
+
+.logout:hover {
+  background: #cdb8b8;
+}
+
+section {
+  margin: 8rem auto;
+
+  display: flex;
+  font-size: 2rem;
+}
+
+.side-bar {
+  padding: 3rem;
+  margin-right: 12rem;
+  margin-top: 6rem;
+  border-right: 1px solid gray;
+  padding-left: 1rem;
+}
+
+.avatar {
+  width: 10rem;
+  border-radius: 50%;
+  margin-left: 2rem;
+}
+
+/* / */
+.main {
+  width: 100%;
+}
+.card-container {
+  display: flex;
+  margin-bottom: 2rem;
+}
+.card {
+  width: 90%;
+  border: 1px solid gray;
+  padding: 1rem;
+  box-shadow: 2px 2px 2px 2px gray;
+}
+
+.display-image {
+  margin-right: 1rem;
+}
+
+.display-image img {
+  border-radius: 50%;
+}
+
+.content {
+  padding: 1rem;
+  margin-bottom: 1rem;
+  text-align: justify;
+}
+
+.tiny-deets {
+  display: flex;
+  font-size: 1rem;
+}
+
+.tiny-deets div {
+  margin-right: 1rem;
+  margin-left: 1rem;
+}
+
+.post-timeline {
+  text-align: center;
+  width: 12rem;
+  padding: 1rem;
+}
+.posts:hover,
+.tl:hover {
+  background: #cdb8b8;
+  border-radius: 2rem;
+  cursor: pointer;
+}
+
+.display-name {
+  width: 12rem;
+  text-align: center;
+  padding: 1rem;
+}

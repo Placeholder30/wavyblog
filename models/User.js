@@ -7,13 +7,14 @@ function User(data) {
 
 module.exports = User;
 
-User.prototype.register = function (callback) {
-  //hash password
-  let salt = bcrypt.genSaltSync(10);
-  this.data.password = bcrypt.hashSync(this.data.password, salt);
-  //add data to database
-  userCollection.insertOne(this.data);
-  callback();
+User.prototype.register = function () {
+  return new Promise((resolve, reject) => {
+    //hash password
+    let salt = bcrypt.genSaltSync(10);
+    this.data.password = bcrypt.hashSync(this.data.password, salt);
+    //add data to database
+    userCollection.insertOne(this.data);
+  });
 };
 
 User.prototype.login = function () {
@@ -35,5 +36,3 @@ User.prototype.login = function () {
       });
   });
 };
-
-User.prototype.logout = function () {};

@@ -2,7 +2,7 @@ const User = require("../models/User");
 
 exports.home = (req, res) => {
   if (req.session.email) {
-    res.render("dashboard", { name: req.session.firstName });
+    res.render("timeline", { name: req.session.firstName });
   } else {
     res.render("index");
   }
@@ -35,13 +35,16 @@ exports.registerpage = (req, res) => {
 
 exports.register = (req, res) => {
   let user = new User(req.body);
-  user.register(() => {
-    req.session.email = user.data.email;
-    req.session.firstName = user.data.firstname;
-    req.session.save(() => {
+  user
+    .register()
+    .then(() => {
+      req.session.email = user.data.email;
+      req.session.firstName = user.data.firstname;
+      req.session.save();
+    })
+    .then(() => {
       res.redirect("/");
     });
-  });
 };
 
 exports.logout = (req, res) => {

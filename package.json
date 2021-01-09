@@ -4,7 +4,7 @@
   "description": " a blog app for edgy people",
   "main": "app.js",
   "scripts": {
-    "start": "node db.js",
+    "start": "nodemon db.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -12,6 +12,7 @@
   "license": "ISC",
   "dependencies": {
     "bcryptjs": "^2.4.3",
+    "chalk": "^4.1.0",
     "connect-mongo": "^3.2.0",
     "dotenv": "^8.2.0",
     "ejs": "^3.1.5",
@@ -20,7 +21,5 @@
     "mongodb": "^3.6.3",
     "nodemon": "^2.0.7"
   },
-  "devDependencies": {
-    
-  }
+  "devDependencies": {}
 }

@@ -4,6 +4,9 @@ html {
   padding: 0;
   font-size: 10px;
 }
+body {
+  background-color: floralwhite;
+}
 .container {
   width: 70vw;
   margin: 0 auto;
@@ -35,18 +38,22 @@ a {
 
 .blog-section {
   margin: 8rem auto;
-  border: 1px solid gray;
 
   display: flex;
   font-size: 2rem;
 }
 
 .side-bar {
-  padding: 2rem;
+  padding: 3rem;
   margin-right: 15rem;
+  border-right: 1px solid gray;
 }
 
 .avatar {
   width: 6rem;
   border-radius: 50%;
+}
+
+textarea {
+  resize: none;
 }

@@ -1,6 +1,7 @@
 const express = require("express");
 const session = require("express-session");
 const MongoStore = require("connect-mongo")(session);
+const chalk = require("chalk");
 const app = express();
 
 const sessionOptions = session({
@@ -22,7 +23,12 @@ const router = require("./router");
 app.use("/", router);
 
 app.listen(process.env.PORT, () => {
-  console.log(`Your app is now listening on port 3000`);
+  console.log(`Your app is now listening on port ${process.env.PORT}`);
+  console.log(
+    `Click to run your app: ${chalk.underline.magenta(
+      "http://localhost:3000"
+    )} `
+  );
 });
 
 module.exports = app;
