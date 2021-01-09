@@ -71,7 +71,12 @@ section {
 .card-container {
   display: flex;
   margin-bottom: 2rem;
+  transition: transform 0.2s;
 }
+.card-container:hover {
+  transform: scale(1.1);
+}
+
 .card {
   width: 90%;
   border: 1px solid gray;

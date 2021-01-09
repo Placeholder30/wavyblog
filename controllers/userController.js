@@ -35,20 +35,23 @@ exports.registerpage = (req, res) => {
 
 exports.register = (req, res) => {
   let user = new User(req.body);
-  user
-    .register()
-    .then(() => {
-      req.session.email = user.data.email;
-      req.session.firstName = user.data.firstname;
-      req.session.save();
-    })
-    .then(() => {
+  user.register(() => {
+    req.session.email = user.data.email;
+    req.session.firstName = user.data.firstname;
+    req.session.save(() => {
       res.redirect("/");
     });
+  });
 };
 
 exports.logout = (req, res) => {
   req.session.destroy(() => {
     res.redirect("/");
   });
+};
+
+exports.createPost = (req, res) => {
+  req.session.email
+    ? res.render("createPost", { name: req.session.firstName })
+    : res.redirect("/");
 };
