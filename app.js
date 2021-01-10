@@ -11,6 +11,7 @@ const sessionOptions = session({
   saveUninitialized: false,
   cookie: { maxAge: 1000 * 60 * 60, httpOnly: true },
 });
+
 app.use(express.static("public"));
 app.use(sessionOptions);
 
