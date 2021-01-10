@@ -125,3 +125,11 @@ section {
   text-align: center;
   padding: 1rem;
 }
+
+textarea {
+  resize: none;
+}
+
+.post-heading {
+  margin-right: 15rem;
+}
