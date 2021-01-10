@@ -7,12 +7,14 @@ function User(data) {
 
 module.exports = User;
 
-User.prototype.register = function () {
+User.prototype.register = function (callback) {
   //hash password
   let salt = bcrypt.genSaltSync(10);
   this.data.password = bcrypt.hashSync(this.data.password, salt);
+
   //add data to database
   userCollection.insertOne(this.data);
+  callback();
 };
 
 User.prototype.login = function () {
@@ -24,7 +26,7 @@ User.prototype.login = function () {
           existingUser &&
           bcrypt.compareSync(this.data.password, existingUser.password)
         ) {
-          resolve("resolved");
+          resolve(existingUser.firstname);
         } else {
           reject("rejected");
         }

@@ -1,5 +1,6 @@
 const mongodb = require("mongodb");
 const dotenv = require("dotenv");
+const chalk = require("chalk");
 dotenv.config();
 
 mongodb.connect(
@@ -11,7 +12,7 @@ mongodb.connect(
       const app = require("./app");
       console.log("connection to db successful");
     } catch (err) {
-      console.log("an error occured connecting to db", err);
+      console.log(chalk.red("an error occured connecting to db"), err);
     }
   }
 );
