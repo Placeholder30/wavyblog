@@ -1,0 +1,2 @@
+use ckeditor for createPost page
+install with npm

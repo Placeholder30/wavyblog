@@ -1,6 +1,6 @@
 const mongodb = require("mongodb");
 const dotenv = require("dotenv");
-const chalk = require("chalk");
+
 dotenv.config();
 
 mongodb.connect(

@@ -50,6 +50,8 @@ exports.logout = (req, res) => {
   });
 };
 
+//use ckeditor for createPost page
+
 exports.createPost = (req, res) => {
   req.session.email
     ? res.render("createPost", { name: req.session.firstName })
