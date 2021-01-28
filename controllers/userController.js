@@ -12,21 +12,17 @@ exports.loginpage = (req, res) => {
   res.render("login");
 };
 
-exports.login = (req, res) => {
+exports.login = async (req, res) => {
   let user = new User(req.body);
-
-  user
-    .login()
-    .then((firstName) => {
-      req.session.email = user.data.email;
-      req.session.firstName = firstName;
-      req.session.save(() => {
-        res.redirect("/");
-      });
-    })
-    .catch(() => {
-      res.send("enter a valid email or password");
-    });
+  try {
+    let firstName = await user.login();
+    req.session.email = user.data.email;
+    req.session.firstName = firstName;
+    await req.session.save();
+    res.redirect("/");
+  } catch (error) {
+    res.send("enter a valid email or password");
+  }
 };
 
 exports.registerpage = (req, res) => {
@@ -35,13 +31,19 @@ exports.registerpage = (req, res) => {
 
 exports.register = (req, res) => {
   let user = new User(req.body);
-  user.register(() => {
-    req.session.email = user.data.email;
-    req.session.firstName = user.data.firstname;
-    req.session.save(() => {
+  user
+    .register()
+    .then(() => {
+      req.session.email = user.data.email;
+      req.session.firstName = user.data.firstname;
+      req.session.save();
+    })
+    .then(() => {
       res.redirect("/");
+    })
+    .catch((err) => {
+      console.log(err);
     });
-  });
 };
 
 exports.logout = (req, res) => {
@@ -56,4 +58,12 @@ exports.createPost = (req, res) => {
   req.session.email
     ? res.render("createPost", { name: req.session.firstName })
     : res.redirect("/");
+};
+
+exports.makePost = (req, res) => {
+  console.log(req.session.email);
+  if (req.session.email) {
+    let user = new User(req.body, req.session.email);
+    user.createPost().then(res.send("Post successfully sent!"));
+  }
 };
