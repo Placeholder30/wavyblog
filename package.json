@@ -4,6 +4,7 @@
   "description": " a blog app for edgy people",
   "main": "app.js",
   "scripts": {
+    
     "start": "node db.js",
     "start-dev": "nodemon db.js",
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -22,6 +23,6 @@
     "mongodb": "^3.6.3",
     "nodemon": "^2.0.7"
     
-  },
-  "devDependencies": {}
+  }
+  
 }

@@ -1,27 +1,36 @@
 const bcrypt = require("bcryptjs");
+const session = require("express-session");
 const userCollection = require("../db").db().collection("userdata");
+const postCollection = require("../db").db().collection("postdata");
 
-function User(data) {
-  this.data = data;
-}
+// let finding = postCollection.find({ email: "Anon@Doe.com" }).toArray();
+// finding.then((dat) => {
+//   console.log(dat);
+// });
+//
+class User {
+  constructor(data, sessionEmail) {
+    this.data = data;
+    this.sessionEmail = sessionEmail;
+  }
+  register() {
+    return new Promise(async (resolve, reject) => {
+      //hash password
+      let salt = bcrypt.genSaltSync(10);
+      this.data.password = bcrypt.hashSync(this.data.password, salt);
 
-module.exports = User;
+      //add data to database
+      await userCollection.insertOne(this.data);
+      resolve();
+    });
+  }
 
-User.prototype.register = function (callback) {
-  //hash password
-  let salt = bcrypt.genSaltSync(10);
-  this.data.password = bcrypt.hashSync(this.data.password, salt);
-
-  //add data to database
-  userCollection.insertOne(this.data);
-  callback();
-};
-
-User.prototype.login = function () {
-  return new Promise((resolve, reject) => {
-    userCollection
-      .findOne({ email: this.data.email })
-      .then((existingUser) => {
+  async login() {
+    try {
+      return new Promise(async (resolve, reject) => {
+        let existingUser = await userCollection.findOne({
+          email: this.data.email,
+        });
         if (
           existingUser &&
           bcrypt.compareSync(this.data.password, existingUser.password)
@@ -30,9 +39,22 @@ User.prototype.login = function () {
         } else {
           reject("rejected");
         }
-      })
-      .catch(() => {
-        console.log("Please try again later!");
       });
-  });
-};
+    } catch (err) {
+      return err(err);
+    }
+  }
+
+  async createPost() {
+    let postData = this.data;
+    postData.email = this.sessionEmail;
+    console.log(this.data);
+    try {
+      await postCollection.insertOne(postData);
+    } catch (err) {
+      return err;
+    }
+  }
+}
+
+module.exports = User;
