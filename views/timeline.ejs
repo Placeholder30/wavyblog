@@ -24,31 +24,15 @@
           </div>
 
           <div class="display-name"><%=name%></div>
-
           <div class="posts post-timeline"><a href="/createPost">POSTS</a></div>
           <div class="tl post-timeline"><a href="/">TIMELINE</a></div>
         </div>
 
         <div class="main">
           <h1>Timeline</h1>
-          <div class="card-container">
-            <div class="display-image">
-              <img src="./assets/todd_chavez.jpg" alt="" width="50px" />
-            </div>
-            <div class="card">
-              <div class="title"></div>
-              <div class="content">
-                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ab
-                suscipit consectetur velit esse hic, molestiae vitae quia sequi
-                reprehender
-              </div>
-              <div class="tiny-deets">
-                <div class="user"><%=name%></div>
-                <div class="date">Jan 9th, 2021</div>
-                <div class="time">06:02 PM</div>
-              </div>
-            </div>
-          </div>
+          <% if (posts.length < 1){ %>
+          <div>Go write your first post, Shakespeare has nothing on you.</div>
+          <% } else{ posts.map((post)=>{ %>
 
           <div class="card-container">
             <div class="display-image">
@@ -57,18 +41,21 @@
             <div class="card">
               <div class="title"></div>
               <div class="content">
-                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ab
-                suscipit consectetur velit esse hic, molestiae vitae quia sequi
-                reprehender
+                <h5><%=post['blog-title']%></h5>
+                <p><%=post.text%></p>
               </div>
               <div class="tiny-deets">
                 <div class="user"><%=name%></div>
-                <div class="date">Jan 9th, 2021</div>
-                <div class="time">06:02 PM</div>
+                <div class="date"><%= new Date().toDateString()%></div>
+                <div class="time"><%= new Date().toLocaleTimeString()%></div>
               </div>
             </div>
           </div>
+
+          <% })%>
         </div>
+
+        <% } %>
       </section>
     </div>
   </body>

@@ -1,8 +1,9 @@
 const User = require("../models/User");
 
-exports.home = (req, res) => {
+exports.home = async (req, res) => {
   if (req.session.email) {
-    res.render("timeline", { name: req.session.firstName });
+    let posts = await User.post(req.session.email);
+    res.render("timeline", { name: req.session.firstName, posts: posts });
   } else {
     res.render("index");
   }
@@ -61,7 +62,7 @@ exports.createPost = (req, res) => {
 };
 
 exports.makePost = (req, res) => {
-  console.log(req.session.email);
+  // console.log(req.session.email);
   if (req.session.email) {
     let user = new User(req.body, req.session.email);
     user.createPost().then(res.send("Post successfully sent!"));

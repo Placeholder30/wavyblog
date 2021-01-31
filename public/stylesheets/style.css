@@ -65,3 +65,21 @@ p {
 body {
   background-color: floralwhite;
 }
+
+@media (max-width: 768px) {
+  h1 {
+    font-size: 3rem;
+  }
+  p {
+    font-size: 1.6rem;
+  }
+}
+
+@media (max-width: 500px) {
+  h1 {
+    font-size: 1.7rem;
+  }
+  p {
+    font-size: 1.3rem;
+  }
+}
