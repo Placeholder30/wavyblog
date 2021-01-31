@@ -3,9 +3,6 @@ const session = require("express-session");
 const MongoStore = require("connect-mongo")(session);
 const chalk = require("chalk");
 const app = express();
-const ejsLint = require("ejs-lint");
-
-ejsLint("views/timeline.ejs");
 
 const sessionOptions = session({
   secret: "this is my secret",
