@@ -3,11 +3,6 @@ const session = require("express-session");
 const userCollection = require("../db").db().collection("userdata");
 const postCollection = require("../db").db().collection("postdata");
 
-// let finding = postCollection.find({ email: "Anon@Doe.com" }).toArray();
-// finding.then((dat) => {
-//   console.log(dat);
-// });
-//
 class User {
   constructor(data, sessionEmail) {
     this.data = data;
@@ -48,7 +43,6 @@ class User {
   async createPost() {
     let postData = this.data;
     postData.email = this.sessionEmail;
-    console.log(this.data);
     try {
       await postCollection.insertOne(postData);
     } catch (err) {
@@ -56,5 +50,10 @@ class User {
     }
   }
 }
+//Send a post!!
+User.post = function (email) {
+  let posts = postCollection.find({ email: email }).toArray();
+  return posts;
+};
 
 module.exports = User;

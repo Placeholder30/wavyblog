@@ -65,9 +65,7 @@ section {
 }
 
 /* / */
-.main {
-  width: 100%;
-}
+
 .card-container {
   display: flex;
   margin-bottom: 2rem;
@@ -126,10 +124,44 @@ section {
   padding: 1rem;
 }
 
+/* Create Post */
+
 textarea {
   resize: none;
 }
 
 .post-heading {
   margin-right: 15rem;
+}
+.form-input {
+  width: 100%;
+}
+.form-input input[type="text"] {
+  width: 97.49%;
+}
+
+textarea {
+  width: 100%;
+}
+
+@media (max-width: 750px) {
+  .side-bar {
+    margin-right: 2rem;
+  }
+  .post-heading {
+    margin-right: 5rem;
+    font-size: 2.5rem;
+  }
+}
+
+@media (max-width: 500px) {
+  section {
+    flex-direction: column-reverse;
+  }
+  .side-bar {
+    border-right: none;
+  }
+  h1 {
+    margin-left: 2rem;
+  }
 }

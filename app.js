@@ -3,13 +3,16 @@ const session = require("express-session");
 const MongoStore = require("connect-mongo")(session);
 const chalk = require("chalk");
 const app = express();
+const ejsLint = require("ejs-lint");
+
+ejsLint("views/timeline.ejs");
 
 const sessionOptions = session({
   secret: "this is my secret",
   store: new MongoStore({ client: require("./db") }),
   resave: false,
   saveUninitialized: false,
-  cookie: { maxAge: 1000 * 60 * 60, httpOnly: true },
+  cookie: { maxAge: 1000 * 60 * 60 * 2, httpOnly: true },
 });
 
 app.use(express.static("public"));
